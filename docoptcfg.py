@@ -73,6 +73,8 @@ def settable_options(doc, argv, ignore, options_first):
                 continue  # Don't care about this if we can't set it.
             if getattr(option, 'long') in booleans and getattr(option, 'value') == 0:
                 repeatable.add(getattr(option, 'long'))
+            elif isinstance(getattr(option, 'value'), str):
+                continue  # Check manually the type because strings are iterable
             elif hasattr(getattr(option, 'value'), '__iter__'):
                 repeatable.add(getattr(option, 'long'))
 
